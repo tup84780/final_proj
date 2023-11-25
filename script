@@ -24,9 +24,9 @@ label start:
 
     # These display lines of dialogue.
 
-    e "You've created a new Ren'Py game."
+    e "Welcome to The Forest Story: An educational novel on deforestation!"
 
-    e "Once you add a story, pictures, and music, you can release it to the world!"
+    e "In this visual novel, you will get to learn about the pressing issue of deforestation, including current data on the topic."
 
     # This ends the game.
 
