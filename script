@@ -24,10 +24,46 @@ label start:
 
     # These display lines of dialogue.
 
-    e "Welcome to The Forest Story: An educational novel on deforestation!"
+    e "Welcome to The Forest Story: An educational novel on deforestation and its severe impacts on our environment"
 
     e "In this visual novel, you will get to learn about the pressing issue of deforestation, including current data on the topic."
+
+    menu: 
+        "So, what would you like to learn about first? "
+
+        "What is deforestation? ":
+            jump def_choice
+
+        "What are some of the impacts of deforestation?":
+            jump impact_choice
+
+        "Why are forests important?":
+            jump importance_choice
+
+        "Can I learn about some current data on deforestation?":
+            jump data_choice
+
+        "I want to end here! I don't care about forests!":
+            return 
+
+
+
+
+    label def_choice: 
+        # show something
+        scene bg room mountains
+        "Deforestation is...."
+
+        menu: 
+            "Based on what you've learned"
+
+            
+
+
+
+
 
     # This ends the game.
 
     return
+
