@@ -3,7 +3,7 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-define e = Character("Eileen")
+define e = Character("Old Man of the Forest")
 
 
 # The game starts here.
@@ -14,13 +14,13 @@ label start:
     # add a file (named either "bg room.png" or "bg room.jpg") to the
     # images directory to show it.
 
-    scene bg room
+    scene bg summer 6
 
     # This shows a character sprite. A placeholder is used, but you can
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
 
-    show eileen happy
+    show old man normal
 
     # These display lines of dialogue.
 
@@ -43,6 +43,9 @@ label start:
         "Can I learn about some current data on deforestation?":
             jump data_choice
 
+        "Can I show you what I've learned through this visual novel?": 
+            jump test_choice
+
         "I want to end here! I don't care about forests!":
             return 
 
@@ -51,11 +54,75 @@ label start:
 
     label def_choice: 
         # show something
-        scene bg room mountains
-        "Deforestation is...."
+        scene bg room house
+        show old man normal
+        e "Deforestation is the purposeful clearing of forested land, according to National Geographic."
+        show old man normal at right 
+        show deforested area at left:
+            yalign 0.45
+        e "This is an example of a deforested area."
+        hide deforested area
+        show old man normal
+        e "Forests are cleared for various purposes, including agriculture, industrial development, or the harvesting of wood for fuel or construction."
+        e "In recent times, the most devastating displays of deforestation have occurred around the equator, in the vital ecosystems of tropical rainforests."
+        e "This has had devastating effects, which you can learn more about in the 'impacts of deforestation' module of this visual novel."
+        e "Now that you know what deforestation is, it's time to return home and learn even more!"
+        
+       
+    label impact_choice: 
 
-        menu: 
-            "Based on what you've learned"
+
+    label importance_choice:
+
+
+    label data_choice: 
+
+
+    label test_choice: 
+        scene bg room mountain
+        show old man normal
+        #Initialize score
+        $ quiz_score = 0
+        
+        # 1st Question
+        e "What is the definition of deforestation?"
+        menu:
+            "The purposeful clearing of forested land.":
+                $ quiz_score += 1
+            "It's when I don't like going in the forest.":
+                e "Incorrect..."
+        
+        # 2nd Question
+        e "How does deforestation impact the environment?"
+        menu:
+            "Blue":
+                $ quiz_score += 1
+            "Yellow":
+                "Incorrect..."
+                
+        # 3rd Question
+        e "What... is the air-speed velocity of an unladen swallow?"
+        menu:
+            "I don't know":
+                e "incorrect...."
+            "African or European?":
+                $ quiz_score += 1
+                
+        # Check the quiz score
+        if quiz_score == 3:
+            # Win
+            show old man normal
+            e "You passed! Well done!"
+            # Did he win? Yes.
+            $ win = True
+        else:
+            # Lose
+            show old man angry
+            e "You did not pass. Clearly you do not understand deforestation! Have you no care for the world around you?"
+            e "Go on... continue the novel and learn more in your future endeavors..."
+            $ win = False
+
+
 
             
 
@@ -66,4 +133,3 @@ label start:
     # This ends the game.
 
     return
-
