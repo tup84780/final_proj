@@ -1,0 +1,19 @@
+library(dplyr)
+library(lubridate)
+library(reshape)
+install.packages("ggplot2")
+library(ggplot2)
+install.packages("wesanderson")
+library("wesanderson")
+data <-  read.csv("C:/Users/rache/Desktop/fall 2023/intro to python/TreeCoverLoss_2001-2020_ByRegion.csv")
+data_byUSA <- subset(data, CountryCode =="USA")
+counts <- table(data_byUSA$Year)
+library(RColorBrewer)
+coul <- brewer.pal(5, "Greens") 
+barplot(height=data_byUSA$TreeCoverLoss_ha, names=data_byUSA$Year,
+        xlab="Year", 
+        ylab="Tree Cover Loss (hectares)", 
+        main="Tree Cover Loss in the USA from 2001-2020 (ha)",
+        ylim=c(0,3000000),
+        col=coul,
+        cex.names=1.5, cex.lab=1.5)
