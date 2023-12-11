@@ -3,11 +3,11 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
-define e = Character("Old Man of the Forest")
+define e = Character("Balthazar of the Forest")
+define w = Character("Darcy the Data Cat")
 
 
 # The game starts here.
-
 label start:
 
     # Show a background. This uses a placeholder by default, but you can
@@ -28,23 +28,23 @@ label start:
 
     e "In this visual novel, you will get to learn about the pressing issue of deforestation, including current data on the topic."
 
-    menu: 
-        "So, what would you like to learn about first? "
+    menu Main: 
+        "So, what would you like to learn about? "
 
         "What is deforestation? ":
             jump def_choice
 
-        "What are some of the impacts of deforestation?":
+        "What are some of the impacts of deforestation, and why are forests important?":
             jump impact_choice
-
-        "Why are forests important?":
-            jump importance_choice
 
         "Can I learn about some current data on deforestation?":
             jump data_choice
 
         "Can I show you what I've learned through this visual novel?": 
             jump test_choice
+
+        "Can I play a fun game to distract myself from the horrors of deforestation?": 
+            jump game_choice
 
         "I want to end here! I don't care about forests!":
             return 
@@ -59,7 +59,7 @@ label start:
         e "Deforestation is the purposeful clearing of forested land, according to National Geographic."
         show old man normal at right 
         show deforested area at left:
-            yalign 0.45
+            yalign 0.40
         e "This is an example of a deforested area."
         hide deforested area
         show old man normal
@@ -67,19 +67,72 @@ label start:
         e "In recent times, the most devastating displays of deforestation have occurred around the equator, in the vital ecosystems of tropical rainforests."
         e "This has had devastating effects, which you can learn more about in the 'impacts of deforestation' module of this visual novel."
         e "Now that you know what deforestation is, it's time to return home and learn even more!"
+        scene bg summer 6
+        show old man normal
+        jump Main
+
         
        
     label impact_choice: 
-
-
-    label importance_choice:
-
+        scene Summer4 
+        show old man normal
+        e "The impacts of deforestation are severe."
+        e "Increased CO2 emissions are one example of how deforestation impacts the environment."
+        e "According to NASA, CO2 content in the atmosphere has increased due to human activities by 50% in the past 200 years."
+        e "When trees are removed and can't convert CO2 to O2, more CO2 remains in the atmosphere. This results in increased global temperatures, accelerating the rate of climate change."
+        e "In addition to increased CO2 content, deforestation results in habitat loss for a variety of organisms. This can cause extinctions and endangerments of such species."
+        e "Accoridng to National Geographic, around 80 percent of all the planet's terrestrial animals and plants live in forests/"
+        show old man normal at right 
+        show orangutan at left: 
+            yalign 0.40
+        e "Pictured here is an orangutan, just one of many species native to forested habitats."
+        e "Not only that, but habitat loss also causes infectious diseases to spread from animals to humans, spreading disease as a a result of deforestation, according to National Geographic."
+        hide orangutan 
+        hide old man normal
+        show old man normal
+        e "Deforestation has far reaching effects that aren't covered in this visual novel,even including providing clean water for communities. "
+        e "Some of these effect may not have even been discovered yet."
+        e "So, go forward in the novel and learn more!"
+        show old man normal 
+        scene bg summer 6
+        jump main_menu
+        
 
     label data_choice: 
-
+        scene cloudy day 
+        show old man normal
+        e "There are a plethora of resources out there to teach you about how severe deforestation is. The data in this presentation only scratches the surface. Do your own research and learn as much as you can!"
+        e "My friend Darcy, the Data cat, will help you understand some figures on deforestation."
+        hide old man normal 
+        show cat smile at right
+        show tree cover loss at left: 
+            yalign 0.10
+        hide cat smiling 
+        show cat meow at right
+        w "This bar plot represents the tree cover loss experienced in the USA by year since 2020. The y-axis is hectares of land. One hectare is roughly 2 and a half football fields"
+        w "The y-axis reaches all the way up to 3 million hectares. That's roughly 7 and a half million football fields per year! "
+        w "Can you even imagine the magnitude of that level of forest loss?"
+        hide tree cover loss 
+        show co2 emissions at left: 
+            yalign 0.10
+        w "This bar plot represents the level of CO2 emissions in the USA from deforestation by year in Megagrams, a unit which is equal to 1000 kilograms. "
+        w "In another section of the novel you can learn about the impacts of increased atmospheric CO2, a severe and dangerous accelerant to climate change. "
+        w "Imagine how severe the impacts are when we emit over a million megagrams of CO2 a year (just in the US)!"
+        hide co2 emissions
+        show average loss at left: 
+            yalign 0.10
+        w "This bar plot is an interesting one to look at because it tells us what drivers of deforestation destroy the most forest on average. "
+        w "This plot shows that Forestry is the most deadly driver of deforestation, taking the lead in average tree cover loss."
+        w "Forestry includes logging, wood harvesting, and infrastructure (construction)."
+        w "While forestry may take the lead, all factors contribute to the high levels of deforestation on average."
+        hide cat meow 
+        hide average loss 
+        scene bg summer 6
+        show old man normal
+        jump Main
 
     label test_choice: 
-        scene bg room mountain
+        scene sky blue
         show old man normal
         #Initialize score
         $ quiz_score = 0
@@ -89,27 +142,56 @@ label start:
         menu:
             "The purposeful clearing of forested land.":
                 $ quiz_score += 1
+                "Correct."
             "It's when I don't like going in the forest.":
                 e "Incorrect..."
+            "It's the clearing of grassy land.": 
+                e "Incorrect!"
+
         
         # 2nd Question
-        e "How does deforestation impact the environment?"
+        e "What driver of deforestation clears the most tree cover, on average?"
         menu:
-            "Blue":
+            "Forestry":
                 $ quiz_score += 1
-            "Yellow":
-                "Incorrect..."
+                "Correct."
+            "Urbanization":
+                e "Incorrect..."
+            "Commodities": 
+                e "Incorrect!"
                 
         # 3rd Question
-        e "What... is the air-speed velocity of an unladen swallow?"
+        e "For what population of the earth do forests provide three-fourths of their total habitat?"
         menu:
-            "I don't know":
-                e "incorrect...."
-            "African or European?":
+            "Marsupials. ":
+                e "Incorrect..."
+            "Birds.  ":
                 $ quiz_score += 1
+                "Correct."
+            "Terrestrial plants and animals. ": 
+                e "Incorrect!"
+
+        # 4th Question
+        e "What is one effect of deforestation on the climate? "
+        menu:
+            "Lowering sea levels. ":
+                e "Incorrect...."
+            "Increased global temperatures.":
+                $ quiz_score += 1
+                "Correct."
+            "Increased biodiversity. ": 
+                e "Incorrect!"
+
+        # 5th Question
+        e "How large is a hectare?"
+        menu:
+            "About 2 and a half football fields. ":
+                $ quiz_score += 1
+            "3 feet.":
+                e "Incorrect!"
                 
         # Check the quiz score
-        if quiz_score == 3:
+        if quiz_score == 5:
             # Win
             show old man normal
             e "You passed! Well done!"
@@ -121,15 +203,14 @@ label start:
             e "You did not pass. Clearly you do not understand deforestation! Have you no care for the world around you?"
             e "Go on... continue the novel and learn more in your future endeavors..."
             $ win = False
+        show old man normal 
+        scene bg summer 6
+        jump Main
 
-
-
-            
-
-
-
-
+    label game_choice: 
+        pass
 
     # This ends the game.
 
     return
+
