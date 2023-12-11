@@ -74,14 +74,14 @@ label start:
         
        
     label impact_choice: 
-        scene Summer4 
+        scene nice day 
         show old man normal
         e "The impacts of deforestation are severe."
         e "Increased CO2 emissions are one example of how deforestation impacts the environment."
-        e "According to NASA, CO2 content in the atmosphere has increased due to human activities by 50% in the past 200 years."
+        e "According to NASA, CO2 content in the atmosphere has increased due to human activities by 50 percent in the past 200 years."
         e "When trees are removed and can't convert CO2 to O2, more CO2 remains in the atmosphere. This results in increased global temperatures, accelerating the rate of climate change."
         e "In addition to increased CO2 content, deforestation results in habitat loss for a variety of organisms. This can cause extinctions and endangerments of such species."
-        e "Accoridng to National Geographic, around 80 percent of all the planet's terrestrial animals and plants live in forests/"
+        e "Accoridng to National Geographic, around 80 percent of all the planet's terrestrial animals and plants live in forests."
         show old man normal at right 
         show orangutan at left: 
             yalign 0.40
@@ -92,10 +92,10 @@ label start:
         show old man normal
         e "Deforestation has far reaching effects that aren't covered in this visual novel,even including providing clean water for communities. "
         e "Some of these effect may not have even been discovered yet."
-        e "So, go forward in the novel and learn more!"
-        show old man normal 
+        e "So, go forward in the novel and learn more!" 
         scene bg summer 6
-        jump main_menu
+        show old man normal
+        jump Main
         
 
     label data_choice: 
@@ -134,6 +134,7 @@ label start:
     label test_choice: 
         scene sky blue
         show old man normal
+        e "Welcome to your test! Here you can show me what you've learned. I certainly hope you do well!"
         #Initialize score
         $ quiz_score = 0
         
@@ -203,14 +204,14 @@ label start:
             e "You did not pass. Clearly you do not understand deforestation! Have you no care for the world around you?"
             e "Go on... continue the novel and learn more in your future endeavors..."
             $ win = False
-        show old man normal 
         scene bg summer 6
+        show old man normal
         jump Main
 
     label game_choice: 
-        pass
+        scene bg summer 6
+        show old man normal
 
     # This ends the game.
 
     return
-
