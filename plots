@@ -18,3 +18,45 @@ barplot(height=data_byUSA$TreeCoverLoss_ha, names=data_byUSA$Year,
         ylim=c(0,3000000),
         col=coul,
         cex.names=1.5, cex.lab=1.5)
+
+coul2 <- brewer.pal(5,"YlOrRd")
+barplot(height=data_byUSA$GrossEmissions_Co2_all_gases_Mg, names=data_byUSA$Year,
+        xlab="Year", 
+        ylab="Gross CO2 Emissions (Mg)", 
+        main="Gross CO2 Emissions (Mg) in the USA from Deforestation by Year",
+        ylim=c(0,1200000000),
+        col=coul2,
+        cex.names=1.5, cex.lab=1.5)
+
+data_driver <- read.csv("C:/Users/rache/Desktop/fall 2023/intro to python/TreeCoverLoss_2001-2020_DominantDrivers.csv")
+data_comm <- subset(data_driver, DriverType =="Commodity driven deforestation")
+av_comm <- mean(data_comm$TreeCoverLoss_ha)
+
+data_for <- subset(data_driver, DriverType =="Forestry")
+av_for <- mean(data_for$TreeCoverLoss_ha)
+
+data_shift <- subset(data_driver, DriverType =="Shifting agriculture")
+av_shift <- mean(data_shift$TreeCoverLoss_ha)
+
+data_unknown <- subset(data_driver, DriverType =="Unknown")
+av_unknown <- mean(data_unknown$TreeCoverLoss_ha)
+
+data_urb <- subset(data_driver, DriverType =="Urbanization")
+av_urb <- mean(data_urb$TreeCoverLoss_ha)
+
+data_wild <- subset(data_driver, DriverType =="Wildfire")
+av_wild <- mean(data_wild$TreeCoverLoss_ha)
+
+df <- data.frame (Name  = c("Commodities", "Forestry", "Shifting Agriculture", "Unknown", "Urbanization", "Wildfire"),
+                  Average = c(av_comm, av_for, av_shift, av_unknown, av_urb, av_wild)
+)
+df
+
+coul3 <- brewer.pal(6,"PuRd")
+barplot(height=df$Average, names=df$Name,
+        xlab="Dominant Driver of Deforestation", 
+        ylab="Average Tree Cover Loss (ha)", 
+        main="Average Tree Cover Loss (ha) by Dominant Driver of Deforestation",
+        col=coul3,
+        cex.names=1.0, cex.lab=1.5, 
+        ylim=c(0,6e+06))
