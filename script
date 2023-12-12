@@ -46,8 +46,8 @@ label start:
         "Can I play a fun game to distract myself from the horrors of deforestation?": 
             jump game_choice
 
-        "I want to end here! I don't care about forests!":
-            return 
+        "I want to end here! ":
+            jump end_choice 
 
 
 
@@ -125,6 +125,8 @@ label start:
         w "This plot shows that Forestry is the most deadly driver of deforestation, taking the lead in average tree cover loss."
         w "Forestry includes logging, wood harvesting, and infrastructure (construction)."
         w "While forestry may take the lead, all factors contribute to the high levels of deforestation on average."
+        hide average loss 
+        w "So, now you know even more about deforestation and some current data on the topic. I hope these plots were informative!"
         hide cat meow 
         hide average loss 
         scene bg summer 6
@@ -210,7 +212,15 @@ label start:
 
     label game_choice: 
         scene bg summer 6
-        show old man normal
+        show old man worried
+        e "Game pending."
+        jump Main
+
+    label end_choice: 
+        scene bg summer 6
+        show old man worried
+        e "I hope you enjoyed this visual novel. Take what you've learned with you as you go forth!"
+        return 
 
     # This ends the game.
 
